@@ -11,7 +11,7 @@ use LWP::UserAgent;
 use HTML::TokeParser;
 use vars qw($VERSION);
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 sub new {
     my $proto = shift;
@@ -26,29 +26,25 @@ sub new {
     return $self;
 }
 
-sub schedule_date {
-    my($self) = shift;
-    if(@_) { $self->{schedule_date} = shift }
-    return $self->{schedule_date};
-}
-
-sub search_text {
-    my($self) = shift;
-    if(@_) { $self->{search_text} = shift }
-    return $self->{search_text};
-}
-
 sub schedule {
     my($self) = shift;
+    my $schedule;
 
     # Example
     #my $schedule = "$self->{schedule}?schedDate=04%2F04%2F2002+06%3A00%3A00";
     #my $schedule = "$self->{schedule}?schedDate=04/04/2002+06:00:00";
     #my $schedule = "$self->{schedule}"; # Current
 
-    my $sched_date = $self->{schedule_date} || '';
-    $sched_date .= '+06:00:00' if $sched_date;
-    my $schedule = "$self->{schedule}?schedDate=$sched_date";
+    my $sched_date = shift;
+    if( $sched_date ) {
+        my $year = substr($sched_date,0,4);
+        my $month = substr($sched_date,4,2);
+        my $day = substr($sched_date,6,2);
+        $sched_date = "$month/$day/$year+06:00:00";
+        $schedule = "$self->{schedule}?schedDate=$sched_date";
+    } else {
+        $schedule = "$self->{schedule}";
+    }
 
     my $html = get($schedule);
 
@@ -98,7 +94,8 @@ sub schedule {
 sub search {
     my($self) = shift;
 
-    my $search_text = $self->{search_text};
+    my $search_text = shift;
+    return undef unless defined $search_text;
 
     my $ua = LWP::UserAgent->new;
 
@@ -164,11 +161,10 @@ WWW::Sundance - Get movie schedules/info from Sundance.
 
   use WWW::Sundance;
   my $sd = WWW::Sundance->new;
-  $sd->schedule_date('07/28/2002');
-  $sd->schedule;
+  $sd->schedule();              # Today's date
+  $sd->schedule('20020802');    # Selected date (yyyymmdd)
 
-  $sd->search_text('fellini');
-  $sd->search;
+  $sd->search('bergman');       # Search - title, director or keyword
 
 =head1 DESCRIPTION
 
@@ -188,25 +184,13 @@ This is the contructor for a new WWW:Sundance object;
 
 =over 4
 
-=item schedule_date ( DATE )
-
-If C<DATE> is passed, this method will set the schedule date to query.
-The format for C<DATE> is 'mm/dd/yyyy'. Apologies to non-US users...
-this is the date format used in the Sundance query string.
-The schedule date is returned.
-
-=item schedule ()
+=item schedule ( [DATE] )
 
 This method will fetch the schedule for the schedule_date.
+Format for DATE is YYYYMMDD.
 If schedule_date is not set, then schedule for current date will be fetched.
 
-=item search_text ( TEXT )
-
-If C<TEXT> is passed, this method will set the search string to be used
-to query Sundance.
-The search text is returned.
-
-=item search ()
+=item search ( [SEARCH_TEXT] )
 
 This method will fetch all entries matching search_text.
 

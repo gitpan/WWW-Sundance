@@ -4,3 +4,8 @@ Revision history for Perl extension WWW::Sundance.
 	- original version; created by h2xs 1.21 with options
 		-X -A -n WWW::Sundance
 
+0.02  Wed Jul 31 2002
+        - Removed schedule_date and search_text functions.
+          Date and seach text now passed to schedule and
+          search functions respectively.
+

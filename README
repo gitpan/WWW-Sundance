@@ -1,14 +1,13 @@
-WWW/Sundance version 0.01
+WWW/Sundance version 0.02
 =========================
 SYNOPSIS
 
   use WWW::Sundance;
   my $sd = WWW::Sundance->new;
-  $sd->schedule_date('07/28/2002');
-  $sd->schedule;
+  $sd->schedule();              # Today's date
+  $sd->schedule('20020802');    # Selected date (yyyymmdd)
 
-  $sd->search_text('fellini');
-  $sd->search;
+  $sd->search('bergman');       # Search - title, director or keyword
 
 DESCRIPTION
 

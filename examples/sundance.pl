@@ -3,8 +3,7 @@ use strict;
 use WWW::Sundance;
 
 my $sd = WWW::Sundance->new;
-$sd->schedule_date('07/28/2002');
-$sd->schedule;
+$sd->schedule();              # Today's date
+$sd->schedule('20020802');    # Selected date
 
-$sd->search_text('bergman');
-$sd->search;
+$sd->search('bergman');       # Search - title, director or keyword
