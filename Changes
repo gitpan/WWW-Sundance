@@ -1,0 +1,6 @@
+Revision history for Perl extension WWW::Sundance.
+
+0.01  Mon Jul 29 22:19:17 2002
+	- original version; created by h2xs 1.21 with options
+		-X -A -n WWW::Sundance
+

@@ -1,0 +1,8 @@
+TODO
+
+- Return result in data structure instead of just printing.
+- Search by time as well as date.
+- Return movie description and play times (if any) with search results.
+- Allow other date formats and separate year, month and day.
+- Add a real test.
+- Other things when I think of them...

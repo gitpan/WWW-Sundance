@@ -1,0 +1,67 @@
+WWW/Sundance version 0.01
+=========================
+SYNOPSIS
+
+  use WWW::Sundance;
+  my $sd = WWW::Sundance->new;
+  $sd->schedule_date('07/28/2002');
+  $sd->schedule;
+
+  $sd->search_text('fellini');
+  $sd->search;
+
+DESCRIPTION
+
+WWW::Sundance is used to fetch movie schedules and info from the Sundance web site.
+
+REQUIREMENTS
+
+Perl version 5.000 or higher. Developed using version 5.6.1 on Linux.
+
+WHERE CAN I GET IT?
+
+www.cpan.org/authors/id/D/DS/DSPARLING
+
+INSTALLATION
+
+To install this module type the following:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+DEPENDENCIES
+
+LWP
+HTML::TokeParser
+
+DOCUMENTATION
+
+Documentation is included in the module as POD.
+A man file should be created in the installation process.
+
+CHANGES
+
+See the Changes file.
+
+AUTHOR
+
+Douglas S. Sparling <doug@dougsparling.com>
+
+DISCLAIMER
+
+This program is distributed in the hope that it will be
+useful, but without any warranty; without even the implied
+warranty of merchantability or fitness for a particular purpose.
+
+SUPPORT
+
+Questions, bug reports, useful code bits, and suggestoins for
+WWW:Sundance should be sent to me at doug@dougsparling.com.
+
+COPYRIGHT AND LICENSE
+
+Copyright (c) 2002 Douglas Sparling. All rights reserved. This program is free
+software; you can redistribute it and/or modify it under the same terms
+as Perl itself;
